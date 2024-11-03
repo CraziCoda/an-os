@@ -1,6 +1,5 @@
 [org 0x7c00]
 [bits 16]
-
     mov     bx,     0x1000
     mov     ah,     0x02
     mov     al,     30
@@ -11,7 +10,7 @@
     int     0x13
 
     cli                             ; Turn off All Interrupts
-    lgdt                            ; Load GDT
+    lgdt    [GDT_DESC]              ; Load GDT
 
     mov     eax,    cr0
     or      eax,    0x1
@@ -34,7 +33,7 @@ INIT_PM:
     mov     esp,    ebp
 
 
-    ;call 0x1000
+    call 0x1000
     jmp     $
 
 GDT_BEGIN:
@@ -51,7 +50,7 @@ GDT_CODE_SEG:
     db      11001111b
     db      0x0
 
-GDT_CODE_SEG:
+GDT_DATA_SEG:
     dw      0xffff
     dw      0x0
     db      0x0

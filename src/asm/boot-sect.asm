@@ -1,11 +1,11 @@
 [org 0x7c00]
 [bits 16]
-    mov     bx,     0x1000
-    mov     ah,     0x02
-    mov     al,     30
-    mov     ch,     0x00
-    mov     dh,     0x00
-    mov     cl,     0x02
+    mov     bx,     0x1000          ; Where to place the OS location
+    mov     ah,     0x02            ; BIOS read sector function
+    mov     al,     30              ; Number of Sectors to read
+    mov     ch,     0x00            ; Cylinder to Select
+    mov     dh,     0x00            ; Head to Select
+    mov     cl,     0x02            ; Where to start reading
 
     int     0x13
 
@@ -31,7 +31,6 @@ INIT_PM:
     ; Update the Stack Segement
     mov     ebp,    0x90000
     mov     esp,    ebp
-
 
     call 0x1000
     jmp     $

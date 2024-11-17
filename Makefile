@@ -15,9 +15,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.bin: $(SRC_DIR)/%.asm
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+# $(OBJ_DIR)/%.bin: $(SRC_DIR)/%.asm
+# 	@mkdir -p $(dir $@)
+# 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(OBJS_C)
 	@mkdir -p ${OBJ_DIR}/asm
@@ -32,3 +32,6 @@ all: $(OBJS_C)
 
 run:
 	@qemu-system-i386 -drive format=raw,file=${BIN_DIR}/os-image
+
+clean:
+	rm -rf ${OBJ_DIR}/asm ${OBJ_DIR}/c ${BIN_DIR}/*

@@ -14,7 +14,7 @@ void clear()
     char *framebuffer_ptr = (char *) FB_MEM_LOC;
 
     unsigned int i = 0;
-    while (i < 2 * 80 * 25)
+    while (i < 2 * FB_ROW_LENGTH * FB_COL_LENGTH)
     {
         *(framebuffer_ptr + i) = '\0';
         i += 2;

@@ -26,7 +26,7 @@ all: $(OBJS_C)
 	@nasm ${SRC_DIR}/asm/io.asm -f elf32 -o ${BIN_DIR}/io.bin
 
 	@ld -m elf_i386 -z noexecstack -e kmain -o ${BIN_DIR}/kernel.img -Ttext 0x1000 ${BIN_DIR}/k-entry.bin ${BIN_DIR}/io.bin ${OBJS_C}
-	@objcopy -O binary -j .text ${BIN_DIR}/kernel.img ${BIN_DIR}/kernel.bin
+	@objcopy -O binary ${BIN_DIR}/kernel.img ${BIN_DIR}/kernel.bin
 
 	@cat ${BIN_DIR}/bootsect.bin ${BIN_DIR}/kernel.bin > ${BIN_DIR}/os-image
 

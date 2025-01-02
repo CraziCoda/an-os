@@ -21,3 +21,24 @@ void clear()
     }
     fbMoveCursor(0);
 }
+
+void setMoniterColor(char color)
+{
+    unsigned int i = 1;
+    while (i < 2 * FB_ROW_LENGTH * FB_COL_LENGTH)
+    {
+        *(framebuffer_ptr + i) = color;
+        i += 2;
+    }
+}
+
+void print(char *str)
+{
+    unsigned int i = 0;
+    while (str[i] != '\0')
+    {
+        *(framebuffer_ptr + (i * 2)) = str[i];
+        fbMoveCursor(i + 1);
+        i++;
+    }
+}

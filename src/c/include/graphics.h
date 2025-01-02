@@ -27,9 +27,25 @@
  */
 void fbMoveCursor(unsigned short pos);
 
+/**
+ *  Clears the framebuffer
+ *
+ * @returns void
+ */
 void clear();
-void setMoniterColor(char);
 
-void print(char);
+/**
+ * Sets the color of the moniter
+ * @param color The color to set the moniter to
+ * @returns void
+ */
+void setMoniterColor(char color);
+
+/**
+ * Prints a string to the framebuffer
+ * @param str The string to print
+ * @returns void
+ */
+void print(char *str);
 
 #endif

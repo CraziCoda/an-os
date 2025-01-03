@@ -40,6 +40,18 @@ void print(char *str)
     unsigned int i = 0;
     while (str[i] != '\0')
     {
+        if (str[i] == '\n')
+        {
+            cursor_pos = cursor_pos + FB_ROW_LENGTH - (cursor_pos % FB_ROW_LENGTH);
+            i++;
+            continue;
+        }
+        else if (str[i] == '\t')
+        {
+            cursor_pos = cursor_pos + 4;
+            i++;
+            continue;
+        }
         *(framebuffer_ptr + (cursor_pos * 2)) = str[i];
         fbMoveCursor(cursor_pos + 1);
         i++;

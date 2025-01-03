@@ -1,6 +1,7 @@
 #include "graphics.h"
 
 char *framebuffer_ptr = (char *)FB_MEM_LOC;
+unsigned int cursor_pos = 0;
 
 // Memory Location of framebuffer
 void fbMoveCursor(unsigned short pos)
@@ -9,6 +10,8 @@ void fbMoveCursor(unsigned short pos)
     outb(FB_DATA_PORT, (pos >> 8) && 0x00FF);
     outb(FB_CMD_PORT, FB_LOW_BYTE_CMD);
     outb(FB_DATA_PORT, pos & 0x00FF);
+
+    cursor_pos = pos;
 }
 
 void clear()
@@ -37,8 +40,8 @@ void print(char *str)
     unsigned int i = 0;
     while (str[i] != '\0')
     {
-        *(framebuffer_ptr + (i * 2)) = str[i];
-        fbMoveCursor(i + 1);
+        *(framebuffer_ptr + (cursor_pos * 2)) = str[i];
+        fbMoveCursor(cursor_pos + 1);
         i++;
     }
 }

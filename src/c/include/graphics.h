@@ -42,10 +42,33 @@ void clear();
 void setMoniterColor(char color);
 
 /**
+ * Prints a character to the framebuffer
+ * @param c The character to print
+ * @returns void
+ */
+void printChar(char c);
+
+/**
+ * Prints a character to the framebuffer with a given color
+ * @param c The character to print
+ * @param color The color to print the character in
+ * @returns void
+ */
+void printCharWithColor(char c, char color);
+
+/**
  * Prints a string to the framebuffer
  * @param str The string to print
  * @returns void
  */
 void print(char *str);
+
+/**
+ * Prints a string to the framebuffer with a given color
+ * @param str The string to print
+ * @param color The color to print the string in
+ * @returns void
+ */
+void printWithColor(char *str, char color);
 
 #endif

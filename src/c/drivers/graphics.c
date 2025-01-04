@@ -35,25 +35,59 @@ void setMoniterColor(char color)
     }
 }
 
+void printChar(char c)
+{
+    if (c == '\n')
+    {
+        cursor_pos = cursor_pos + FB_ROW_LENGTH - (cursor_pos % FB_ROW_LENGTH);
+    }
+    else if (c == '\t')
+    {
+        cursor_pos = cursor_pos + 4;
+    }
+    else
+    {
+        *(framebuffer_ptr + (cursor_pos * 2)) = c;
+        fbMoveCursor(cursor_pos + 1);
+    }
+}
+
+
+void printCharWithColor(char c, char color)
+{
+    if (c == '\n')
+    {
+        cursor_pos = cursor_pos + FB_ROW_LENGTH - (cursor_pos % FB_ROW_LENGTH);
+    }
+    else if (c == '\t')
+    {
+        cursor_pos = cursor_pos + 4;
+    }
+    else
+    {
+        *(framebuffer_ptr + (cursor_pos * 2)) = c;
+        *(framebuffer_ptr + (cursor_pos * 2) + 1) = color;
+        fbMoveCursor(cursor_pos + 1);
+    }
+}
+
+
 void print(char *str)
 {
     unsigned int i = 0;
     while (str[i] != '\0')
     {
-        if (str[i] == '\n')
-        {
-            cursor_pos = cursor_pos + FB_ROW_LENGTH - (cursor_pos % FB_ROW_LENGTH);
-            i++;
-            continue;
-        }
-        else if (str[i] == '\t')
-        {
-            cursor_pos = cursor_pos + 4;
-            i++;
-            continue;
-        }
-        *(framebuffer_ptr + (cursor_pos * 2)) = str[i];
-        fbMoveCursor(cursor_pos + 1);
+        printChar(str[i]);
+        i++;
+    }
+}
+
+void printWithColor(char *str, char color)
+{
+    unsigned int i = 0;
+    while (str[i] != '\0')
+    {
+        printCharWithColor(str[i], color);
         i++;
     }
 }
